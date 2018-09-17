@@ -8,14 +8,39 @@ import Check from '../images/check.svg';
 
 type Props = {
   token: string,
-  holdFor: string
+  holdFor: string,
+  actions: {
+    tokenActions: {
+      resetToken: () => void
+    },
+    holdForActions: {
+      clearHoldFor: () => void
+    }
+  }
 };
 
 export default class Home extends Component<Props> {
   props: Props;
 
+  componentDidMount() {
+    const {
+      props: { token, holdFor }
+    } = this;
+    UPRKit.Utils.listenForEvents(token, holdFor);
+  }
+
+  componentWillUnmount() {
+    const {
+      props: {
+        actions: { holdForActions, tokenActions }
+      }
+    } = this;
+    holdForActions.clearHoldFor();
+    tokenActions.resetToken();
+    UPRKit.Utils.disconnect();
+  }
+
   render() {
-    UPRKit.Utils.listenForEvents(this.props.token, this.props.holdFor);
     return (
       <div>
         <NavBar title="Present" />

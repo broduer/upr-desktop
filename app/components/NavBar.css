@@ -1,8 +1,8 @@
 .navBar {
-  background: white;
+  background: #340636;
   text-align: center;
   margin-bottom: 10px;
-  color: #340636;
+  color: white;
 }
 
 .navBar p {
@@ -15,13 +15,18 @@
   padding: 5px;
 }
 
-.backButton a {
-  color: #340636;
+.backButton button {
+  color: white;
+  background: none;
+  border: none;
+  height: 50px;
+  cursor: pointer;
 }
 
-.backButton b {
+.backButton span {
   padding: 8px;
   font-size: 18px;
+  vertical-align: super;
   position: relative;
-  bottom: 8px;
+  bottom: 2px;
 }

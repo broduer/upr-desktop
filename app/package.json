@@ -1,7 +1,7 @@
 {
   "name": "upr-desktop",
   "productName": "Universal Presenter Remote",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Control your presentations from any platform.",
   "main": "./main.prod.js",
   "author": {
@@ -11,11 +11,11 @@
   },
   "scripts": {
     "electron-rebuild": "node -r babel-register ../internals/scripts/ElectronRebuild.js",
-    "postinstall": "npm run electron-rebuild"
+    "postinstall": "yarn electron-rebuild"
   },
   "license": "MIT",
   "dependencies": {
-    "socket.io-client": "^2.0.4",
-    "send-keys-native": "file:../../send-keys-native"
+    "send-keys-native": "file:../../send-keys-native",
+    "socket.io-client": "^2.0.4"
   }
 }
