@@ -9,6 +9,7 @@ export const SLIDE_DOWN = 'SlideDown';
 export const PLAY_MEDIA = 'PlayMedia';
 
 let socket;
+let sigCematary = {};
 
 type messageType = {
   action: string,
@@ -27,7 +28,12 @@ function listenForEvents(token: string, holdFor: string) {
     verify.write(jsonMsg);
     verify.end();
     const isValid = verify.verify(pub.key, message.signature, 'hex');
-    if (isValid && message.holdfor === holdFor) {
+    if (
+      isValid &&
+      message.holdfor === holdFor &&
+      !sigCematary[message.signature]
+    ) {
+      sigCematary[message.signature] = new Date();
       switch (message.action) {
         case SLIDE_UP: {
           SendKeys.rightArrow();
@@ -52,6 +58,7 @@ function disconnect() {
   if (socket) {
     socket.close();
     socket = undefined;
+    sigCematary = {};
   }
 }
 
