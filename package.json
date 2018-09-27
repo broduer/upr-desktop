@@ -217,6 +217,7 @@
     "electron-log": "^2.2.14",
     "electron-updater": "^2.20.1",
     "history": "^4.7.2",
+    "lodash": "^4.17.11",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-hot-loader": "^4.3.4",
