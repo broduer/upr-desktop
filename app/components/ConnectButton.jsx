@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import * as Sentry from '@sentry/electron';
 import UPRKit from '../UPRKit';
 import styles from './ConnectButton.css';
 
@@ -34,7 +35,14 @@ export default class TokenForm extends Component<Props> {
     const button = event.target;
     const originalText = button.innerHTML;
     button.innerHTML = 'Joining...';
-    const status = await UPRKit.Session.joinSession(token);
+    const status = await UPRKit.Session.joinSession(token).catch(e => {
+      dialog.showErrorBox(
+        'Whoops!',
+        `There was an error connecting to UPR - (${e.message})`
+      );
+      Sentry.captureException(e);
+    });
+    if (!status) return;
     if (status.data > 0) {
       button.innerHTML = originalText;
       holdForActions.setHoldFor(status.data.toString());
