@@ -21,7 +21,7 @@ type Props = {
   }
 };
 
-export default class TokenForm extends Component<Props> {
+export default class ConnectButton extends Component<Props> {
   props: Props;
 
   async joinSession(event) {
