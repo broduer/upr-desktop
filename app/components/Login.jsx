@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import SendKeys from 'send-keys-native';
 import styles from './Login.css';
 import TokenForm from '../containers/TokenForm';
 import ConnectButton from '../containers/ConnectButton';
@@ -11,8 +12,46 @@ type Props = {
   token: string
 };
 
-export default class Login extends Component<Props> {
-  props: Props;
+type State = {
+  hasPermissions: boolean
+};
+
+export default class Login extends Component<Props, State> {
+  state = { hasPermissions: true };
+
+  componentDidMount() {
+    SendKeys.hasPermissions()
+      .then(v => this.setState({ hasPermissions: v }))
+      .catch(e => {
+        console.error(e);
+      });
+  }
+
+  macPermissionWarning() {
+    const {
+      state: { hasPermissions }
+    } = this;
+    if (hasPermissions) {
+      return null;
+    }
+    return (
+      <Modal title="Welcome to UPR">
+        <div>
+          <h1>Review Permissions</h1>
+          <p>
+            In order for UPR to control your presentations, it needs permission
+            to and Application called System Events.
+          </p>
+          <br />
+          <p>
+            To allow this, open System Preferences then select Security &
+            Privacy. Make sure UPR is checked in both Accessibility and
+            Automation tabs.
+          </p>
+        </div>
+      </Modal>
+    );
+  }
 
   render() {
     const {
@@ -26,11 +65,7 @@ export default class Login extends Component<Props> {
         <h2>Universal Presenter Remote</h2>
         <TokenForm />
         <ConnectButton token={token} />
-        <Modal title="Welcome to UPR">
-          <div>
-            <h1>Hello world</h1>
-          </div>
-        </Modal>
+        {this.macPermissionWarning()}
       </div>
     );
   }

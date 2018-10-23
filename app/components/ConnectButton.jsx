@@ -22,9 +22,7 @@ type Props = {
 };
 
 export default class ConnectButton extends Component<Props> {
-  props: Props;
-
-  async joinSession(event) {
+  async joinSession(event: Event) {
     const {
       props: {
         token,

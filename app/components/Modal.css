@@ -10,15 +10,6 @@
   box-shadow: 0 0 10px grey;
 }
 
-.container h2 {
-  font-size: 3rem;
-  margin: 8px;
-}
-
-.logo {
-  width: 250px;
-}
-
-.banner {
-  width: 500px;
+.bodyContainer {
+  padding: 30px;
 }

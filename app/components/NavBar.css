@@ -30,3 +30,18 @@
   position: relative;
   bottom: 2px;
 }
+
+.closeButton {
+  position: absolute;
+  padding: 5px;
+  right: 0;
+}
+
+.closeButton button {
+  color: white;
+  background: none;
+  border: none;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+}

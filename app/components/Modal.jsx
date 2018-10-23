@@ -8,17 +8,37 @@ type Props = {
   children: React.Children
 };
 
-export default class Modal extends Component<Props> {
-  props: Props;
+type State = {
+  presenting: boolean
+};
+
+export default class Modal extends Component<Props, State> {
+  state = { presenting: true };
+
+  close() {
+    this.setState({
+      presenting: false
+    });
+  }
 
   render() {
     const {
-      props: { title, children }
+      props: { title, children },
+      state: { presenting }
     } = this;
+    if (!presenting) {
+      return null;
+    }
     return (
       <div className={styles.container} data-tid="container">
-        <NavBar title={title} />
-        {children}
+        <NavBar
+          title={title}
+          hasCloseButton
+          closeDelegate={() => {
+            this.close();
+          }}
+        />
+        <div className={styles.bodyContainer}>{children}</div>
       </div>
     );
   }
