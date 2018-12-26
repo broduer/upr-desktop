@@ -1,7 +1,7 @@
 {
   "name": "upr-desktop",
   "productName": "Universal Presenter Remote",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Control your presentations from any platform.",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",

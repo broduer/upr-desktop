@@ -22,28 +22,24 @@ type State = {
 export default class Login extends Component<Props, State> {
   state = { hasPermissions: true };
 
-  componentDidMount() {
-    this.checkPermissions();
+  constructor(props) {
+    super(props);
+    this.checkPermissions = this.checkPermissions.bind(this);
   }
 
-  initialPermissionCheck = true;
+  componentWillMount() {
+    this.checkPermissions();
+    // setInterval(this.checkPermissions, 1000);
+  }
 
-  checkPermissions() {
-    SendKeys.hasPermissions()
-      .then(v => {
-        if (!this.initialPermissionCheck && !v) {
-          dialog.showErrorBox(
-            'Whoops!',
-            `UPR is still missing the required permissions. Please try again, or restart UPR Desktop.`
-          );
-          Sentry.captureMessage('Check permissions failed', 'warning');
-        }
-        this.initialPermissionCheck = false;
-        return this.setState({ hasPermissions: v });
-      })
+  async checkPermissions() {
+    const v = await SendKeys.hasPermissions()
       .catch(e => {
         console.error(e);
+        Sentry.captureException(e);
       });
+    this.setState({ hasPermissions: v });
+    return v;
   }
 
   macPermissionWarning() {
@@ -58,8 +54,15 @@ export default class Login extends Component<Props, State> {
         title="Welcome to UPR"
         buttonTitle="Check Permissions"
         buttonActive
-        buttonOnClick={() => {
-          this.checkPermissions();
+        buttonOnClick={async () => {
+          const v = await this.checkPermissions();
+          if (!v) {
+            dialog.showErrorBox(
+              'Whoops!',
+              `UPR is still missing the required permissions. Please try again, or restart UPR Desktop.`
+            );
+            Sentry.captureMessage('Check permissions failed', 'warning');
+          }
         }}
       >
         <div>
@@ -70,7 +73,7 @@ export default class Login extends Component<Props, State> {
           </p>
           <p>
             To allow this, open System Preferences then select Security &
-            Privacy. Make sure UPR is checked in the Automation tab.
+            Privacy. Make sure UPR is checked in both the Automation and Accessibility tabs.
           </p>
         </div>
       </Modal>
@@ -83,12 +86,12 @@ export default class Login extends Component<Props, State> {
     } = this;
     return (
       <div className={styles.container} data-tid="container">
-        <img src={Logo} alt="Logo" className={styles.logo} />
-        <br />
-        <img src={Banner} alt="Banner" className={styles.banner} />
+        <img src={Logo} alt="Logo" className={styles.logo}/>
+        <br/>
+        <img src={Banner} alt="Banner" className={styles.banner}/>
         <h2>Universal Presenter Remote</h2>
-        <TokenForm />
-        <ConnectButton token={token} />
+        <TokenForm/>
+        <ConnectButton token={token}/>
         {this.macPermissionWarning()}
       </div>
     );
