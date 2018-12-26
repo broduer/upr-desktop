@@ -14,7 +14,12 @@ import { app, BrowserWindow, dialog } from 'electron';
 import IsDev from 'electron-is-dev';
 import { autoUpdater } from 'electron-updater';
 import ElectronLog from 'electron-log';
+import * as Sentry from '@sentry/electron';
 import MenuBuilder from './menu';
+
+Sentry.init({
+  dsn: 'https://cf07bcc0594241ce8c7db854e0f3f65a@sentry.io/1297683'
+});
 
 let mainWindow = null;
 

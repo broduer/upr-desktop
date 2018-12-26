@@ -1,7 +1,8 @@
 // @flow
 import React, { Component } from 'react';
+import * as Sentry from '@sentry/electron';
 import UPRKit from '../UPRKit';
-import styles from './ConnectButton.css';
+import Button from './Button';
 
 const { dialog } = require('electron').remote;
 
@@ -20,10 +21,13 @@ type Props = {
   }
 };
 
-export default class TokenForm extends Component<Props> {
-  props: Props;
+export default class ConnectButton extends Component<Props> {
+  constructor(props) {
+    super(props);
+    this.joinSession = this.joinSession.bind(this);
+  }
 
-  async joinSession(event) {
+  async joinSession() {
     const {
       props: {
         token,
@@ -31,17 +35,19 @@ export default class TokenForm extends Component<Props> {
         actions: { holdForActions, tokenActions }
       }
     } = this;
-    const button = event.target;
-    const originalText = button.innerHTML;
-    button.innerHTML = 'Joining...';
-    const status = await UPRKit.Session.joinSession(token);
+    const status = await UPRKit.Session.joinSession(token).catch(e => {
+      dialog.showErrorBox(
+        'Whoops!',
+        `There was an error connecting to UPR - (${e.message})`
+      );
+      Sentry.captureException(e);
+    });
+    if (!status) return;
     if (status.data > 0) {
-      button.innerHTML = originalText;
       holdForActions.setHoldFor(status.data.toString());
       history.push('/present');
     } else {
       console.warn(status);
-      button.innerHTML = originalText;
       dialog.showErrorBox(
         'Whoops!',
         'The token you entered does not appear to be valid.'
@@ -54,25 +60,13 @@ export default class TokenForm extends Component<Props> {
     const {
       props: { token }
     } = this;
-    if (token.includes('_')) {
-      return (
-        <div className={[styles.connectButton].join(' ')}>
-          <button type="button">Enter a token...</button>
-        </div>
-      );
-    }
 
     return (
-      <div className={[styles.connectButton, styles.active].join(' ')}>
-        <button
-          type="button"
-          onClick={e => {
-            this.joinSession(e);
-          }}
-        >
-          Start Presenting
-        </button>
-      </div>
+      <Button
+        active={!token.includes('_')}
+        title={token.includes('_') ? 'Enter a token...' : 'Start Presenting'}
+        onClick={this.joinSession}
+      />
     );
   }
 }

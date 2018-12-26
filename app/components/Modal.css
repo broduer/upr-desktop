@@ -1,0 +1,15 @@
+.container {
+  position: absolute;
+  top: 0;
+  width: 75%;
+  height: 85%;
+  left: 12.5%;
+  background: #eee;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 10px grey;
+}
+
+.bodyContainer {
+  padding: 30px;
+}

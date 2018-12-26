@@ -19,7 +19,7 @@ type Props = {
   }
 };
 
-export default class Home extends Component<Props> {
+export default class Present extends Component<Props> {
   props: Props;
 
   componentDidMount() {
@@ -43,7 +43,7 @@ export default class Home extends Component<Props> {
   render() {
     return (
       <div>
-        <NavBar title="Present" />
+        <NavBar title="Present" hasBackButton />
         <div className={styles.container} data-tid="container">
           <h2>Ready to Go</h2>
           <h3>Open your presentation and use the app as a remote</h3>
