@@ -8,6 +8,8 @@ import Logo from '../images/icon.png';
 import Banner from '../images/banner.png';
 import Modal from './Modal';
 
+const { dialog } = require('electron').remote;
+
 type Props = {
   token: string
 };
@@ -23,9 +25,20 @@ export default class Login extends Component<Props, State> {
     this.checkPermissions();
   }
 
+  initialPermissionCheck = true;
+
   checkPermissions() {
     SendKeys.hasPermissions()
-      .then(v => this.setState({ hasPermissions: v }))
+      .then(v => {
+        if (!this.initialPermissionCheck && !v) {
+          dialog.showErrorBox(
+            'Whoops!',
+            `UPR is still missing the required permissions. Please try again, or restart UPR Desktop.`
+          );
+        }
+        this.initialPermissionCheck = false;
+        return this.setState({ hasPermissions: v });
+      })
       .catch(e => {
         console.error(e);
       });
@@ -55,8 +68,7 @@ export default class Login extends Component<Props, State> {
           </p>
           <p>
             To allow this, open System Preferences then select Security &
-            Privacy. Make sure UPR is checked in both Accessibility and
-            Automation tabs.
+            Privacy. Make sure UPR is checked in the Automation tab.
           </p>
         </div>
       </Modal>
