@@ -61,7 +61,7 @@ function listenForEvents(token: string, holdFor: string) {
           break;
       }
     } else {
-      Sentry.captureException(new Error('Message signature mismatch.'));
+      Sentry.captureMessage('Message signature mismatch.');
     }
   });
 }

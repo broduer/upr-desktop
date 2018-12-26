@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import SendKeys from 'send-keys-native';
+import * as Sentry from '@sentry/electron';
 import styles from './Login.css';
 import TokenForm from '../containers/TokenForm';
 import ConnectButton from '../containers/ConnectButton';
@@ -35,6 +36,7 @@ export default class Login extends Component<Props, State> {
             'Whoops!',
             `UPR is still missing the required permissions. Please try again, or restart UPR Desktop.`
           );
+          Sentry.captureMessage('Check permissions failed', 'warning');
         }
         this.initialPermissionCheck = false;
         return this.setState({ hasPermissions: v });
