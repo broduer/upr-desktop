@@ -2,10 +2,14 @@
 import React, { Component } from 'react';
 import styles from './Modal.css';
 import NavBar from '../containers/NavBar';
+import Button from './Button';
 
 type Props = {
   title: string,
-  children: React.Children
+  children: React.Children,
+  buttonTitle: string,
+  buttonOnClick: () => void,
+  buttonActive: boolean
 };
 
 type State = {
@@ -23,7 +27,7 @@ export default class Modal extends Component<Props, State> {
 
   render() {
     const {
-      props: { title, children },
+      props: { title, children, buttonTitle, buttonOnClick, buttonActive },
       state: { presenting }
     } = this;
     if (!presenting) {
@@ -39,6 +43,11 @@ export default class Modal extends Component<Props, State> {
           }}
         />
         <div className={styles.bodyContainer}>{children}</div>
+        <Button
+          title={buttonTitle}
+          onClick={buttonOnClick}
+          active={buttonActive}
+        />
       </div>
     );
   }

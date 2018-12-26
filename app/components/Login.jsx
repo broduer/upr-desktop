@@ -20,6 +20,10 @@ export default class Login extends Component<Props, State> {
   state = { hasPermissions: true };
 
   componentDidMount() {
+    this.checkPermissions();
+  }
+
+  checkPermissions() {
     SendKeys.hasPermissions()
       .then(v => this.setState({ hasPermissions: v }))
       .catch(e => {
@@ -35,14 +39,20 @@ export default class Login extends Component<Props, State> {
       return null;
     }
     return (
-      <Modal title="Welcome to UPR">
+      <Modal
+        title="Welcome to UPR"
+        buttonTitle="Check Permissions"
+        buttonActive
+        buttonOnClick={() => {
+          this.checkPermissions();
+        }}
+      >
         <div>
           <h1>Review Permissions</h1>
           <p>
             In order for UPR to control your presentations, it needs permission
             to and Application called System Events.
           </p>
-          <br />
           <p>
             To allow this, open System Preferences then select Security &
             Privacy. Make sure UPR is checked in both Accessibility and

@@ -19,7 +19,14 @@ export default class Button extends Component<Props> {
 
     return (
       <div className={buttonStyles.join(' ')}>
-        <button type="button" onClick={onClick}>
+        <button
+          type="button"
+          onClick={() => {
+            if (active) {
+              onClick();
+            }
+          }}
+        >
           {title}
         </button>
       </div>
