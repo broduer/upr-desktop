@@ -1,6 +1,6 @@
 // @flow
 import { combineReducers } from 'redux';
-import { routerReducer as router } from 'react-router-redux';
+import { routerReducer as router } from 'connected-react-router';
 import token from './token';
 import holdFor from './holdfor';
 
