@@ -4834,10 +4834,10 @@ electron-updater@^4.0.0:
     semver "^5.6.0"
     source-map-support "^0.5.9"
 
-electron@^3.0.10:
-  version "3.0.13"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-3.0.13.tgz#7b065a3d130c6b6379dc78d49515e03f392c1303"
-  integrity sha512-tfx5jFgXhCmpe6oPjcesaRj7geHqQxrJdbpseanRzL9BbyYUtsj0HoxwPAUvCx4+52P6XryBwWTvne/1eBVf9Q==
+electron@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-4.0.0.tgz#6ccb40cc8bf2d49954dcea73b97ae7ad12ee04b3"
+  integrity sha512-3XPG/3IXlvnT1oe1K6zEushoD0SKbP8xwdrL10EWGe6k2iOV4hSHqJ8vWnR8yZ7VbSXmBRfomEFDNAo/q/cwKw==
   dependencies:
     "@types/node" "^8.0.24"
     electron-download "^4.1.0"
@@ -11648,7 +11648,7 @@ semver@~5.3.0:
   dependencies:
     applescript "^1.0.0"
   optionalDependencies:
-    send-keys-native-windows "file:../../../AppData/Local/Yarn/Cache/v4/npm-send-keys-native-1.0.1-03040b51-7ea4-4b86-ba46-1f6d5d0b71bb-1545883513339/node_modules/send-keys-native-windows"
+    send-keys-native-windows "file:../../../AppData/Local/Yarn/Cache/v4/npm-send-keys-native-1.0.1-0f40ada1-a545-4e9f-b3ea-bb4aaa3d7e57-1545884166497/node_modules/send-keys-native-windows"
 
 send@0.16.2:
   version "0.16.2"
