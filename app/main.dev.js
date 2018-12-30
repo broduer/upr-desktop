@@ -111,6 +111,7 @@ app.on('ready', async () => {
   });
 
   autoUpdater.on('update-downloaded', () => {
+    /*
     dialog.showMessageBox(
       {
         title: 'Install Updates',
@@ -121,6 +122,7 @@ app.on('ready', async () => {
         setImmediate(() => autoUpdater.quitAndInstall());
       }
     );
+    */
   });
 
   if (!IsDev) {
