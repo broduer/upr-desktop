@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import Package from '../package.json';
+import Package from '../../package.json';
 import Session from './session';
 import Utils from './utils';
 

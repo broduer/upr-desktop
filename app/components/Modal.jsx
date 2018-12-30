@@ -9,7 +9,8 @@ type Props = {
   children: React.Children,
   buttonTitle: string,
   buttonOnClick: () => void,
-  buttonActive: boolean
+  buttonActive: boolean,
+  canClose: ?boolean
 };
 
 type State = {
@@ -27,7 +28,14 @@ export default class Modal extends Component<Props, State> {
 
   render() {
     const {
-      props: { title, children, buttonTitle, buttonOnClick, buttonActive },
+      props: {
+        title,
+        children,
+        buttonTitle,
+        buttonOnClick,
+        buttonActive,
+        canClose
+      },
       state: { presenting }
     } = this;
     if (!presenting) {
@@ -37,7 +45,7 @@ export default class Modal extends Component<Props, State> {
       <div className={styles.container} data-tid="container">
         <NavBar
           title={title}
-          hasCloseButton
+          hasCloseButton={canClose}
           closeDelegate={() => {
             this.close();
           }}

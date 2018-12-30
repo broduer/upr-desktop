@@ -1,4 +1,4 @@
-/* eslint global-require: 0, flowtype-errors/show-errors: 0 */
+/* eslint global-require: off */
 
 /**
  * This module executes inside of electron's main process. You can start
@@ -33,9 +33,6 @@ if (
   process.env.DEBUG_PROD === 'true'
 ) {
   require('electron-debug')();
-  const path = require('path');
-  const p = path.join(__dirname, '..', 'app', 'node_modules');
-  require('module').globalPaths.push(p);
 }
 
 const installExtensions = async () => {
@@ -114,6 +111,7 @@ app.on('ready', async () => {
   });
 
   autoUpdater.on('update-downloaded', () => {
+    /*
     dialog.showMessageBox(
       {
         title: 'Install Updates',
@@ -124,6 +122,7 @@ app.on('ready', async () => {
         setImmediate(() => autoUpdater.quitAndInstall());
       }
     );
+    */
   });
 
   if (!IsDev) {
