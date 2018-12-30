@@ -157,6 +157,12 @@ export default class MenuBuilder {
           click: () => {
             MenuBuilder.checkForUpdates();
           }
+        },
+        {
+          label: 'Enable Beta Updates',
+          click: () => {
+            MenuBuilder.enableBetaUpdates();
+          }
         }
       ]
     };
@@ -242,6 +248,12 @@ export default class MenuBuilder {
             click: () => {
               MenuBuilder.checkForUpdates();
             }
+          },
+          {
+            label: 'Enable Beta Updates',
+            click: () => {
+              MenuBuilder.enableBetaUpdates();
+            }
           }
         ]
       }
@@ -259,5 +271,10 @@ export default class MenuBuilder {
       });
     });
     autoUpdater.checkForUpdates();
+  }
+
+  static enableBetaUpdates() {
+    autoUpdater.allowPrerelease = true;
+    this.checkForUpdates();
   }
 }
