@@ -11648,7 +11648,7 @@ semver@~5.3.0:
   dependencies:
     applescript "^1.0.0"
   optionalDependencies:
-    send-keys-native-windows "file:../../../AppData/Local/Yarn/Cache/v4/npm-send-keys-native-1.0.1-d5d1d369-3d31-4d0e-b157-9372988a9dff-1545885619785/node_modules/send-keys-native-windows"
+    send-keys-native-windows "file:../../../AppData/Local/Yarn/Cache/v4/npm-send-keys-native-1.0.1-2e9fa25e-b482-4ee7-a4e8-a90f6d3900d6-1546155858864/node_modules/send-keys-native-windows"
 
 send@0.16.2:
   version "0.16.2"
