@@ -109,9 +109,8 @@
     },
     "publish": {
       "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate",
-      "private": false
+      "owner": "brendancboyle",
+      "repo": "upr-desktop"
     }
   },
   "repository": {
